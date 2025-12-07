@@ -22,7 +22,7 @@ export default function TabLayout() {
         },
       }}
     >
-      
+     
 
       {/* ACCEPT TAB */}
       <Tabs.Screen
@@ -39,7 +39,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      {/* DONATE TAB */}
+       {/* DONATE TAB */}
       <Tabs.Screen
         name="donate"
         options={{
@@ -54,6 +54,7 @@ export default function TabLayout() {
           ),
         }}
       />
+
       {/* DETECTION TAB */}
       <Tabs.Screen
         name="detection"
