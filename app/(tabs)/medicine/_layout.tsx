@@ -1,15 +1,134 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Stack, Tabs } from 'expo-router'
+import { Tabs } from "expo-router";
+import { View, StyleSheet } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-const _layout = () => {
+export default function MedicineLayout() {
   return (
-    <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
-  )
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: true,
+
+        // ✅ ACTIVE & INACTIVE TEXT COLOR
+        tabBarActiveTintColor: "#ff2f6a",
+        tabBarInactiveTintColor: "#777",
+
+        tabBarStyle: styles.tabBar,
+
+        tabBarLabelStyle: {
+          fontSize: 11,
+          marginTop: 4,
+        },
+
+        tabBarItemStyle: {
+          justifyContent: "center",
+          alignItems: "center",
+        },
+      }}
+    >
+      {/* HOME */}
+      <Tabs.Screen
+        name="home"
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name="home-outline"
+              size={27}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      {/* AI */}
+      <Tabs.Screen
+        name="ai"
+        options={{
+          tabBarLabel: "AI",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name="sparkles-outline"
+              size={27}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      {/* ADD MEDICINE - FLOATING BUTTON (NO LABEL COLOR CHANGE NEEDED) */}
+      <Tabs.Screen
+        name="addmedicine"
+        options={{
+          tabBarLabel: "",
+          tabBarIcon: () => (
+            <View style={styles.floatingButton}>
+              <Ionicons name="add" size={30} color="#fff" />
+            </View>
+          ),
+        }}
+      />
+
+      {/* HISTORY */}
+      <Tabs.Screen
+        name="history"
+        options={{
+          tabBarLabel: "History",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name="time-outline"
+              size={27}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      {/* INSIGHTS */}
+      <Tabs.Screen
+        name="insights"
+        options={{
+          tabBarLabel: "Insights",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name="bar-chart-outline"
+              size={27}
+              color={color}
+            />
+          ),
+        }}
+      />
+    </Tabs>
+  );
 }
 
-export default _layout
+const styles = StyleSheet.create({
+  tabBar: {
+    position: "absolute",
+    bottom: 10,
+    left: 20,
+    right: 20,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#ffffff",
 
-const styles = StyleSheet.create({})
+    elevation: 10, // Android shadow
+    shadowColor: "#ff2f6a", // iOS shadow
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 5 },
+
+    borderTopWidth: 0,
+  },
+
+  floatingButton: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: "#ff2f6a",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 30,
+    elevation: 8,
+  },
+});
