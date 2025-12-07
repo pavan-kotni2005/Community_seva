@@ -19,7 +19,7 @@ const Donate = () => {
   const [weight, setWeight] = useState('');
   const [hb, setHb] = useState('');
   const [bp, setBp] = useState('');
-
+  const [liveAccess,setLiveAccess] = useState(false);
   const [hasDonatedPreviously, setHasDonatedPreviously] = useState<
     'yes' | 'no' | null
   >(null);
@@ -85,6 +85,7 @@ const Donate = () => {
       diseases,
       medications,
       surgeries,
+      liveAccess
     };
     const { eligible, reasons } = checkEligibility(payload);
     setEligibilityResult({ eligible, reasons });
@@ -700,6 +701,47 @@ const Donate = () => {
                 </TouchableOpacity>
               )
             )}
+            <Text style={styles.sectionTitle}>
+              Are you sure to share your live location?
+            </Text>
+            <View style={styles.liveAccessContainer}>
+
+  {/* YES Option */}
+  <TouchableOpacity
+    style={styles.liveAccessOption}
+    onPress={() => setLiveAccess(true)}
+  >
+    <View
+      style={[
+        styles.liveAccessCheckbox,
+        liveAccess === true && styles.liveAccessCheckboxSelected,
+      ]}
+    >
+      {liveAccess === true && <Text style={styles.liveAccessTick}>✓</Text>}
+    </View>
+    <Text style={styles.liveAccessLabel}>YES</Text>
+  </TouchableOpacity>
+
+  {/* NO Option */}
+  <TouchableOpacity
+    style={styles.liveAccessOption}
+    onPress={() => setLiveAccess(false)}
+  >
+    <View
+      style={[
+        styles.liveAccessCheckbox,
+        liveAccess === false && styles.liveAccessCheckboxSelected,
+      ]}
+    >
+      {liveAccess === false && <Text style={styles.liveAccessTick}>✓</Text>}
+    </View>
+    <Text style={styles.liveAccessLabel}>NO</Text>
+  </TouchableOpacity>
+
+</View>
+
+
+
 
             <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
               <Text style={styles.submitButtonText}>Submit</Text>
@@ -997,6 +1039,67 @@ goBackButtonText: {
   fontSize: 16,
   fontWeight: '700',
 },
+checkboxContainer: {
+  marginTop: 15,
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: 30,
+},
+
+checkboxRowLiveAccess: {
+  flexDirection: "row",
+  alignItems: "center",
+},
+
+// Removed duplicate checkboxBox style definition
+
+checkboxSelected: {
+  backgroundColor: "#dc2626",
+  borderColor: "#dc2626",
+},
+
+liveAccessContainer: {
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 16,
+  gap: 40,
+},
+
+liveAccessOption: {
+  flexDirection: "row",
+  alignItems: "center",
+},
+
+liveAccessCheckbox: {
+  width: 26,
+  height: 26,
+  borderRadius: 6,
+  borderWidth: 2,
+  borderColor: "#dc2626",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#fff",
+  marginRight: 10,
+},
+
+liveAccessCheckboxSelected: {
+  backgroundColor: "#dc2626",
+  borderColor: "#dc2626",
+},
+
+liveAccessTick: {
+  color: "#fff",
+  fontSize: 16,
+  fontWeight: "800",
+},
+
+liveAccessLabel: {
+  fontSize: 16,
+  fontWeight: "700",
+  color: "#450a0a",
+},
+
 
 });
 
